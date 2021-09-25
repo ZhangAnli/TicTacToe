@@ -23,7 +23,7 @@ def evaluateDecoder():
 
 
 def calculate(values, slots):
-    result = ['q', 'c', 'f', 'l', 'p']
+    result = ['q', 'l', 'f', 'e', 'p']
     # for i in range(slots):
     #     result.append(values[i + 1])
     #
