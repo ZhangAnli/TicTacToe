@@ -1,6 +1,4 @@
 import logging
-import sys
-
 from flask import request, jsonify
 from codeitsuisse import app
 
@@ -45,7 +43,7 @@ def calculateP1(json_object):
             result[pos] = 0
         else:
             path = dfs(grid, row, col, 0)
-            if (path == sys.maxsize):
+            if (path == pow(len(grid), 2)):
                 result[pos] = -1
             else:
                 result[pos] = path
@@ -55,16 +53,20 @@ def calculateP1(json_object):
 def dfs(grid, i, j, time):
 
     if i < 0 or j < 0 or i >= len(grid) or j >= len(grid[0]) or grid[i][j] == 0:
-        return sys.maxsize
+        return pow(len(grid), 2)
 
     if (grid[i][j] == 3):
         return time
 
     if (grid[i][j] == 1):
-        return min(
+        grid[i][j] = 0
+        result = min(
             dfs(grid, i + 1, j, time + 1),
             dfs(grid, i - 1, j, time + 1),
             dfs(grid, i, j + 1, time + 1),
             dfs(grid, i, j - 1, time + 1),
         )
+        grid[i][j] = 1
+        return result
+
 
