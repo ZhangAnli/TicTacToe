@@ -11,9 +11,9 @@ logger = logging.getLogger(__name__)
 def evaluateDecoder():
     data = request.get_json()
 
-    possible_values = data["possible_values"]
-    num_slots = int(data["num_slots"])
-    history = data["history"]
+    possible_values = data.get("possible_values")
+    num_slots = int(data.get("num_slots"))
+    history = data.get("history")
 
     result = [{
         "answer": calculate(possible_values, num_slots, history)
