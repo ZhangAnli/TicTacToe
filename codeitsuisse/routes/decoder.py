@@ -1,5 +1,5 @@
 import logging
-import json
+import random
 from flask import request, jsonify
 from codeitsuisse import app
 
@@ -25,6 +25,8 @@ def evaluateDecoder():
 def calculate(values, slots):
     result = []
     for i in range(slots):
-        result.append(values[i])
+        result.append(values[i + 2])
+
+    random.shuffle(result)
     return result
 
