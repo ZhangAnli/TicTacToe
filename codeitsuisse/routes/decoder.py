@@ -24,9 +24,5 @@ def evaluateDecoder():
 
 def calculate(values, slots):
     result = ['z', 't', 's', 'e', 'd']
-    for i in range(slots):
-        result.append(values[i + 1])
-
     random.shuffle(result)
     return result
-
