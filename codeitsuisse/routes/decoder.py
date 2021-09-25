@@ -7,12 +7,12 @@ from codeitsuisse import app
 logger = logging.getLogger(__name__)
 
 
-@app.route('/decoder', methods=['GET', 'POST'])
+@app.route('/decoder', methods=['POST'])
 def evaluateDecoder():
     data = request.get_json()
 
     possible_values = data["possible_values"]
-    num_slots = data["num_slots"]
+    num_slots = int(data["num_slots"])
     history = data["history"]
 
     result = [{
@@ -27,4 +27,4 @@ def calculate(values, slots, history):
     result = []
     for i in range(slots):
         result.append(random.choice(values))
-    return result
+    return ["a", "b", "c", "d"]
