@@ -7,15 +7,15 @@ def calculate(s):
 
         left = i - 1
         right = i + 1
-        if (s[i] == s[left] and s[i] == s[right]):
-            total_score = 0
-        else:
-            total_score = 1
+        total_score = 0
         firstRd = True
 
         while left >= 0 and right < strLen:
 
-            if s[left] != s[right]:
+            if s[left] != s[right] and firstRd:
+                total_score = 1
+                break
+            elif s[left] != s[right] and not firstRd:
                 break
 
             score = 2
@@ -27,10 +27,11 @@ def calculate(s):
                 right += 1
                 score += 1
 
-            if firstRd and s[i] == s[left]:
-                score += 1
-                firstRd = False
-            elif firstRd and s[i] != s[left]:
+            if firstRd:
+                if s[left] == s[i]:
+                    score += 1
+                else:
+                    total_score += 1
                 firstRd = False
 
             if score >= 10:
