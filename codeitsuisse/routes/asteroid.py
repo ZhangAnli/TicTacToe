@@ -10,8 +10,9 @@ logger = logging.getLogger(__name__)
 def evaluateAsteroid():
     data = request.get_json()
     logging.info("data sent for evaluation {}".format(data))
+    test_cases = data.get("test_cases")
     result = []
-    for test_case in data:
+    for test_case in test_cases:
         s = str(test_case)
         current = {"input":s, "score": calculate(s)[0], "origin": calculate(s)[1]}
         result.append(current)
