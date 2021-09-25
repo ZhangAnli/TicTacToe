@@ -18,9 +18,7 @@ def evaluateAsteroid():
         result.append(current)
 
     logging.info("My result :{}".format(result))
-    print(jsonify(result))
-    return jsonify(result)
-
+    return json.dumps(result)
 
 def calculate(s):
 
