@@ -25,7 +25,7 @@ def evaluateDecoder():
 def calculate(values, slots):
     result = []
     for i in range(slots):
-        result.append(values[1])
+        result.append(values[i])
     return result
 
 
