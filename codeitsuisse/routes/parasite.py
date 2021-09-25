@@ -1,5 +1,4 @@
 import logging
-import sys
 
 from flask import request, jsonify
 from codeitsuisse import app
@@ -14,52 +13,43 @@ def evaluateParasite():
     for test_case in data:
         result.append({
             "room": test_case["room"],
-            "p1": calculate(test_case)[0],
-            "p2": calculate(test_case)[1],
-            "p3": calculate(test_case)[3],
-            "p4": calculate(test_case)[4]
+            "p1": calculateP1(test_case),
+            # "p2": calculate(test_case)[1],
+            # "p3": calculate(test_case)[3],
+            # "p4": calculate(test_case)[4]
         })
 
     logging.info("My result :{}".format(result))
     return jsonify(result)
 
-def calculate(json_object):
+def calculateP1(json_object):
 
-    result = []
-
+    # Initiate variables
     grid = json_object["grid"]
     interested_individuals = json_object["interestedIndividuals"]
+    result = {}
 
-    p1 = {}
+    # Convert all 2s to 0s
+    for i in range(len(grid)):
+        for j in range(len(grid[0])):
+            if grid[i][j] == 2:
+                grid[i][j] = 0
+
     for pos in interested_individuals:
-        row = pos.split(',')[0]
-        col = pos.split(',')[1]
+        row = int(pos.split(',')[0])
+        col = int(pos.split(',')[1])
         if grid[row][col] == 0 or grid[row][col] == 2:
-            p1[pos] = -1
+            result[pos] = -1
         else:
-            p1[pos] = dfs(grid, row, col, 0)
-
-    result[0] = p1
+            result[pos] = dfs(grid, row, col, 0)
 
     return result
 
 def dfs(grid, i, j, time):
 
-    if (i < 0 or j < 0 or i >= len(grid) or j >= len(grid[0]) or grid[i][j] in [0, 2]):
+    if i < 0 or j < 0 or i >= len(grid) or j >= len(grid[0]) or grid[i][j] == 0:
         return -1
 
     if (grid[i][j] == 3):
         return time
 
-    if (grid[i][j] == 1):
-        up = dfs(grid, i - 1, j, time + 1)
-        down = dfs(grid, i + 1, j, time + 1)
-        left = dfs(grid, i, j - 1, time + 1)
-        right = dfs(grid, i, j + 1, time + 1)
-
-        considered = []
-        for x in [up, down, left, right]:
-            if x > -1:
-                considered.append(x)
-
-        return min(considered)
