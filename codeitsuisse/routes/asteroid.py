@@ -37,21 +37,26 @@ def calculate(s):
                 break
             c = s[left]
 
+            if left == right:
+                score = 1
+            else:
+                score = 2
+
             while left - 1 >= 0 and s[left - 1] == c:
                 left -= 1
+                score += 1
             while right + 1 < strLen and s[right + 1] == c:
                 right += 1
+                score += 1
 
-            cur_score = right - left + 1
-
-            if cur_score >= 10:
+            if score >= 10:
                 multiplier = 2
-            elif cur_score >= 7:
+            elif score >= 7:
                 multiplier = 1.5
-            elif  cur_score <= 6:
+            elif  score <= 6:
                 multiplier = 1
 
-            total_score += cur_score * multiplier
+            total_score += score * multiplier
 
             left -= 1
             right += 1
