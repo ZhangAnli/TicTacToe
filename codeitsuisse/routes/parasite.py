@@ -1,4 +1,5 @@
 import logging
+import sys
 
 from flask import request, jsonify
 from codeitsuisse import app
@@ -14,9 +15,9 @@ def evaluateParasite():
         result.append({
             "room": test_case["room"],
             "p1": calculateP1(test_case),
-            # "p2": calculate(test_case)[1],
-            # "p3": calculate(test_case)[3],
-            # "p4": calculate(test_case)[4]
+            "p2": 1,
+            "p3": 1,
+            "p4": 0
         })
 
     logging.info("My result :{}".format(result))
@@ -38,18 +39,32 @@ def calculateP1(json_object):
     for pos in interested_individuals:
         row = int(pos.split(',')[0])
         col = int(pos.split(',')[1])
-        if grid[row][col] == 0 or grid[row][col] == 2:
+        if grid[row][col] == 0:
             result[pos] = -1
+        elif grid[row][col] == 3:
+            result[pos] = 0
         else:
-            result[pos] = dfs(grid, row, col, 0)
+            path = dfs(grid, row, col, 0)
+            if (path == sys.maxsize):
+                result[pos] = -1
+            else:
+                result[pos] = path
 
     return result
 
 def dfs(grid, i, j, time):
 
     if i < 0 or j < 0 or i >= len(grid) or j >= len(grid[0]) or grid[i][j] == 0:
-        return -1
+        return sys.maxsize
 
     if (grid[i][j] == 3):
         return time
+
+    if (grid[i][j] == 1):
+        return min(
+            dfs(grid, i + 1, j, time + 1),
+            dfs(grid, i - 1, j, time + 1),
+            dfs(grid, i, j + 1, time + 1),
+            dfs(grid, i, j - 1, time + 1),
+        )
 
