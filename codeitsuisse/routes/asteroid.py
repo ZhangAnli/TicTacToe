@@ -31,18 +31,18 @@ def calculate(s):
         right = i + 1
         total_score = 1
         multiplier = 1
-        c = s[i]
+        origin = s[i]
 
         while left >= 0 and right < strLen:
-            if s[left] != s[right] or s[left] != c or s[right] != c:
+            if s[left] != s[right] or s[left] != origin or s[right] != origin:
                 break
 
             score = 2
 
-            while left - 1 >= 0 and s[left - 1] == c:
+            while left - 1 >= 0 and s[left - 1] == s[left]:
                 left -= 1
                 score += 1
-            while right + 1 < strLen and s[right + 1] == c:
+            while right + 1 < strLen and s[right + 1] == s[right]:
                 right += 1
                 score += 1
 
@@ -57,8 +57,6 @@ def calculate(s):
 
             left -= 1
             right += 1
-            if left >= 0 and right < strLen:
-                c = s[left]
 
         if total_score > result[0]:
             result = [int(total_score), int(i)]
