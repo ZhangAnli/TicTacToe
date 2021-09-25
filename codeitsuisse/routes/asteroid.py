@@ -25,22 +25,31 @@ def calculate(s):
     result = [0, 0]
     strLen = len(s)
 
+    if strLen == 0:
+        return [0,0]
+
+    if strLen < 3:
+        return [1,0]
+
     for i in range(strLen):
 
         left = i - 1
         right = i + 1
-        total_score = 0
+        if left >= 0 and right < strLen and s[left] == s[right] and s[left] == s[i]:
+            total_score = 0
+        else:
+            total_score = 1
         firstRd = True
 
         while left >= 0 and right < strLen:
 
-            if s[left] != s[right] and firstRd:
-                total_score = 1
-                break
-            elif s[left] != s[right] and not firstRd:
+            if s[left] != s[right]:
                 break
 
-            score = 2
+            if firstRd and s[left] == s[right] and s[left] == s[i]:
+                score = 3
+            else:
+                score = 2
 
             while left - 1 >= 0 and s[left - 1] == s[left]:
                 left -= 1
@@ -48,13 +57,6 @@ def calculate(s):
             while right + 1 < strLen and s[right + 1] == s[right]:
                 right += 1
                 score += 1
-
-            if firstRd:
-                if s[left] == s[i]:
-                    score += 1
-                else:
-                    total_score += 1
-                firstRd = False
 
             if score >= 10:
                 total_score += score * 2
@@ -65,6 +67,7 @@ def calculate(s):
 
             left -= 1
             right += 1
+            firstRd = False
 
         if total_score > result[0]:
             result = [total_score, i]
