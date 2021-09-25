@@ -18,6 +18,7 @@ def evaluateDecoder():
     result = {"answer": calculate(possible_values, numSlots)}
 
     logging.info("My result :{}".format(result))
+    logging.info("My history is:{}".format(history))
     return jsonify(result)
 
 
