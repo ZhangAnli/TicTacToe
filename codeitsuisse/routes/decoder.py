@@ -13,6 +13,7 @@ def evaluateDecoder():
     possible_values = data.get("possible_values")
     numSlots = data.get("num_slots")
     history = data.get("history")
+    print(history)
 
     result = {"answer": calculate(possible_values, numSlots)}
 
