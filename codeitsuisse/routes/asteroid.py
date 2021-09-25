@@ -35,6 +35,10 @@ def calculate(s):
         while left >= 0 and right < strLen:
             if s[left] != s[right]:
                 break
+
+
+
+
             c = s[left]
 
             if left == right:
@@ -42,12 +46,14 @@ def calculate(s):
             else:
                 score = 2
 
-            while left - 1 >= 0 and s[left - 1] == c:
-                left -= 1
-                score += 1
-            while right + 1 < strLen and s[right + 1] == c:
-                right += 1
-                score += 1
+            if left - 1 >= 0 and right + 1 < strLen and (s[left - 1] == s[left] and s[right + 1] == s[right]):
+
+                while left - 1 >= 0 and s[left - 1] == c:
+                    left -= 1
+                    score += 1
+                while right + 1 < strLen and s[right + 1] == c:
+                    right += 1
+                    score += 1
 
             if score >= 10:
                 multiplier = 2
