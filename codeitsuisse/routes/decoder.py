@@ -1,8 +1,6 @@
 import logging
 import json
-
 from flask import request, jsonify
-
 from codeitsuisse import app
 
 logger = logging.getLogger(__name__)
@@ -16,14 +14,10 @@ def evaluateDecoder():
     numSlots = data.get("num_slots")
     history = data.get("history")
 
-    result = [
-        {
-            "answer": calculate(possible_values, numSlots)
-        }
-    ]
+    result = {"answer": calculate(possible_values, numSlots)}
 
     logging.info("My result :{}".format(result))
-    return json.dumps(result)
+    return jsonify(result)
 
 
 def calculate(values, slots):
