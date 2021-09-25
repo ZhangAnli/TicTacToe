@@ -8,13 +8,6 @@ logger = logging.getLogger(__name__)
 @app.route('/fixedrace', methods=['GET', 'POST'])
 def evaluateFixedRace():
 
-    # logging.info("data sent for evaluation {}".format(data))
-
         data = request.get_data(as_text=True)
         logging.info("My result :{}".format(data))
         return data
-        # for i in data.split(','):
-        #     if i in map:
-        #         map.update({i, map[i]})
-        #     else:
-        #         map.update({i, 1})
