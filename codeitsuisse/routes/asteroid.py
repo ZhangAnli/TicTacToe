@@ -34,8 +34,12 @@ def calculate(s):
         origin = s[i]
 
         while left >= 0 and right < strLen:
-            if s[left] != s[right] or s[left] != origin or s[right] != origin:
-                break
+            if left == i - 1 and right == i + 1:
+                if s[left] != s[right] or s[left] != origin or s[right] != origin:
+                    break
+            else:
+                if s[left] != s[right]:
+                    break
 
             score = 2
 
