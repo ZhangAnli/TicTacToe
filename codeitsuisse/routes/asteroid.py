@@ -61,6 +61,6 @@ def calculate(s):
                 c = s[left]
 
         if total_score > result[0]:
-            result = [int(total_score), int(i + 1)]
+            result = [int(total_score), int(i)]
 
     return result
