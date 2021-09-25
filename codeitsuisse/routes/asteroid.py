@@ -30,7 +30,7 @@ def calculate(s):
     if strLen < 3:
         return [1,0]
 
-    for i in range(1, strLen - 1):
+    for i in range(strLen):
 
         left = i - 1
         right = i + 1
@@ -45,7 +45,7 @@ def calculate(s):
             if s[left] != s[right]:
                 break
 
-            if firstRd and s[left] == s[right] and s[left] == s[i]:
+            if firstRd and s[left] == s[i]:
                 score = 3
             else:
                 score = 2
