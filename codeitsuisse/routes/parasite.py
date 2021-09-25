@@ -68,5 +68,3 @@ def dfs(grid, i, j, time):
         )
         grid[i][j] = 1
         return result
-
-
