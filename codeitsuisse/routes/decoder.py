@@ -26,3 +26,4 @@ def calculate(values, slots, history):
         result = []
         for i in range(slots):
                 result.append(random.choice(values))
+        return result
