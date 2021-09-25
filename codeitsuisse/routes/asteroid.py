@@ -30,7 +30,6 @@ def calculate(s):
         left = i - 1
         right = i + 1
         total_score = 1
-        multiplier = 1
         origin = s[i]
 
         while left >= 0 and right < strLen:
@@ -50,6 +49,7 @@ def calculate(s):
                 right += 1
                 score += 1
 
+            multiplier = 1
             if score >= 10:
                 multiplier = 2
             elif score >= 7:
