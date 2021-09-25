@@ -27,33 +27,24 @@ def calculate(s):
 
     for i in range(strLen):
 
-        left = i
-        right = i
-        total_score = 0
+        left = i - 1
+        right = i + 1
+        total_score = 1
         multiplier = 1
+        c = s[i]
 
         while left >= 0 and right < strLen:
-            if s[left] != s[right]:
+            if s[left] != s[right] or s[left] != c or s[right] != c:
                 break
 
+            score = 2
 
-
-
-            c = s[left]
-
-            if left == right:
-                score = 1
-            else:
-                score = 2
-
-            if left - 1 >= 0 and right + 1 < strLen and (s[left - 1] == s[left] and s[right + 1] == s[right]):
-
-                while left - 1 >= 0 and s[left - 1] == c:
-                    left -= 1
-                    score += 1
-                while right + 1 < strLen and s[right + 1] == c:
-                    right += 1
-                    score += 1
+            while left - 1 >= 0 and s[left - 1] == c:
+                left -= 1
+                score += 1
+            while right + 1 < strLen and s[right + 1] == c:
+                right += 1
+                score += 1
 
             if score >= 10:
                 multiplier = 2
@@ -66,6 +57,8 @@ def calculate(s):
 
             left -= 1
             right += 1
+            if left >= 0 and right < strLen:
+                c = s[left]
 
         if total_score > result[0]:
             result = [int(total_score), int(i + 1)]
