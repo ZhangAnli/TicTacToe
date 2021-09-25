@@ -7,7 +7,7 @@ from codeitsuisse import app
 logger = logging.getLogger(__name__)
 
 @app.route('/decoder', methods=['GET', 'POST'])
-def evaluateFixedRace():
+def evaluateDecoder():
 
         data = request.get_json()
 
