@@ -1,21 +1,49 @@
-import logging
-import json
+def calculate(s):
 
-from flask import request, jsonify
+    result = [0, 0]
+    strLen = len(s)
 
-from codeitsuisse import app
+    for i in range(strLen):
 
-logger = logging.getLogger(__name__)
+        left = i - 1
+        right = i + 1
+        if (s[i] == s[left] and s[i] == s[right]):
+            total_score = 0
+        else:
+            total_score = 1
+        firstRd = True
 
-@app.route('/tictactoe', methods=['POST'])
-def evaluateTicTacToe():
-    data = request.get_json()
-    logging.info("data sent for evaluation {}".format(data))
+        while left >= 0 and right < strLen:
 
-    # My code
-    battleId = data.get("battleId")
-    # Return result
-    result = battleId
-    logging.info("My result :{}".format(result))
-    return json.dumps(result)
+            if s[left] != s[right]:
+                break
 
+            score = 2
+
+            while left - 1 >= 0 and s[left - 1] == s[left]:
+                left -= 1
+                score += 1
+            while right + 1 < strLen and s[right + 1] == s[right]:
+                right += 1
+                score += 1
+
+            if firstRd and s[i] == s[left]:
+                score += 1
+                firstRd = False
+            elif firstRd and s[i] != s[left]:
+                firstRd = False
+
+            if score >= 10:
+                total_score += score * 2
+            elif score >= 7:
+                total_score += score * 1.5
+            elif  score <= 6:
+                total_score += score * 1
+
+            left -= 1
+            right += 1
+
+        if total_score > result[0]:
+            result = [total_score, i]
+
+    return result

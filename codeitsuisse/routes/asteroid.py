@@ -36,6 +36,7 @@ def calculate(s):
         while left >= 0 and right < strLen:
             if firstRd:
                 if s[left] != s[right] or s[left] != origin or s[right] != origin:
+                    total_score = 1
                     break
             else:
                 if s[left] != s[right]:
