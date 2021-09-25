@@ -51,13 +51,11 @@ def calculate(s):
 
             multiplier = 1
             if score >= 10:
-                multiplier = 2
+                total_score += score * 2
             elif score >= 7:
-                multiplier = 1.5
+                total_score += score * 1.5
             elif  score <= 6:
-                multiplier = 1
-
-            total_score += score * multiplier
+                total_score += score * 1
 
             left -= 1
             right += 1
