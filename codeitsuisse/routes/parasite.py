@@ -7,7 +7,7 @@ from codeitsuisse import app
 logger = logging.getLogger(__name__)
 
 @app.route('/parasite', methods=['POST'])
-def evaluateAsteroid():
+def evaluateParasite():
     data = request.get_json()
     logging.info("data sent for evaluation {}".format(data))
     result = []
