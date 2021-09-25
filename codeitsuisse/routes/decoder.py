@@ -23,6 +23,6 @@ def evaluateDecoder():
 
 
 def calculate(values, slots):
-    result = ['z', 't', 's', 'e', 'd']
+    result = ['z', 'e',  'd', 's', 't']
     random.shuffle(result)
     return result
