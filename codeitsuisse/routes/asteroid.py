@@ -1,5 +1,4 @@
 import logging
-import json
 
 from flask import request, jsonify
 from codeitsuisse import app
@@ -26,12 +25,12 @@ def calculate(s):
     strLen = len(s)
 
     if strLen == 0:
-        return [0,0]
+        return result
 
     if strLen < 3:
         return [1,0]
 
-    for i in range(strLen):
+    for i in range(1, strLen - 1):
 
         left = i - 1
         right = i + 1
