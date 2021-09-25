@@ -16,54 +16,50 @@ def evaluateParasite():
             "room": test_case["room"],
             "p1": calculate(test_case)[0],
             "p2": calculate(test_case)[1],
-            "p3": calculate(test_case[3]),
+            "p3": calculate(test_case)[3],
             "p4": calculate(test_case)[4]
         })
 
     logging.info("My result :{}".format(result))
     return jsonify(result)
 
-def calculate(input):
+def calculate(json_object):
 
     result = []
 
-    # Part 1
-    grid = input["grid"]
-    room = input["room"]
-    part1 = []
-    peoples = []
-    for str in input["interestedIndividuals"]:
-        row = str.split(',')[0]
-        col = str.split(',')[1]
-        peoples.append([row, col])
+    grid = json_object["grid"]
+    interested_individuals = json_object["interestedIndividuals"]
 
-    # Get virus pos
-    virusPos = [-1, -1]
-    for i in range(len(grid)):
-        for j in range(len(grid[0])):
-            if grid[i][j] == 3:
-                virusPos = [i, j]
+    p1 = {}
+    for pos in interested_individuals:
+        row = pos.split(',')[0]
+        col = pos.split(',')[1]
+        if grid[row][col] == 0 or grid[row][col] == 2:
+            p1[pos] = -1
+        else:
+            p1[pos] = dfs(grid, row, col, 0)
 
-
-    def dfs(grid, i, j, x, y, time):
-        if (i < 0 or j < 0 or i >= len(grid) or j >= len(grid[0]) or grid[i][j] != 1):
-            return -1
-
-        if (i == x and j == y):
-            return time
-
-        shortestTime = sys.maxsize
-
-        if (dfs(grid, i + 1, j, x, y, time + 1) != -1):
-            shortestTime = min(shortestTime, dfs(grid, i + 1, j, x, y, time + 1))
-        elif (dfs(grid, i + 1, j, x, y, time + 1) != -1):
-            shortestTime = min(shortestTime, dfs(grid, i + 1, j, x, y, time + 1))
-        elif (dfs(grid, i + 1, j, x, y, time + 1) != -1):
-            shortestTime = min(shortestTime, dfs(grid, i + 1, j, x, y, time + 1))
-        elif (dfs(grid, i + 1, j, x, y, time + 1) != -1):
-            shortestTime = min(shortestTime, dfs(grid, i + 1, j, x, y, time + 1))
-
-
-
+    result[0] = p1
 
     return result
+
+def dfs(grid, i, j, time):
+
+    if (i < 0 or j < 0 or i >= len(grid) or j >= len(grid[0]) or grid[i][j] in [0, 2]):
+        return -1
+
+    if (grid[i][j] == 3):
+        return time
+
+    if (grid[i][j] == 1):
+        up = dfs(grid, i - 1, j, time + 1)
+        down = dfs(grid, i + 1, j, time + 1)
+        left = dfs(grid, i, j - 1, time + 1)
+        right = dfs(grid, i, j + 1, time + 1)
+
+        considered = []
+        for x in [up, down, left, right]:
+            if x > -1:
+                considered.append(x)
+
+        return min(considered)

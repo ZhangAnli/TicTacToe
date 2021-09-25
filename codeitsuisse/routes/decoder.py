@@ -20,7 +20,7 @@ def evaluateDecoder():
     }]
 
     logging.info("My result :{}".format(data))
-    return jsonify(result)
+    return result
 
 
 def calculate(values, slots, history):
