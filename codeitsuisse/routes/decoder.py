@@ -23,10 +23,10 @@ def evaluateDecoder():
 
 
 def calculate(values, slots):
-    result = ['f', 'q', 'c', 'e', 'p']
+    result = ['q', 'c', 'f', 'l', 'p']
     # for i in range(slots):
     #     result.append(values[i + 1])
-
-    random.shuffle(result)
+    #
+    # random.shuffle(result)
     return result
 
