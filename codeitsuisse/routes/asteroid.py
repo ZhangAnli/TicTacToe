@@ -29,11 +29,12 @@ def calculate(s):
 
         left = i - 1
         right = i + 1
-        total_score = 1
+        total_score = 0
         origin = s[i]
+        firstRd = True
 
         while left >= 0 and right < strLen:
-            if left == i - 1 and right == i + 1:
+            if firstRd:
                 if s[left] != s[right] or s[left] != origin or s[right] != origin:
                     break
             else:
@@ -49,7 +50,10 @@ def calculate(s):
                 right += 1
                 score += 1
 
-            multiplier = 1
+            if firstRd:
+                score += 1
+                firstRd = False
+
             if score >= 10:
                 total_score += score * 2
             elif score >= 7:
