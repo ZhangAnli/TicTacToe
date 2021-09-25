@@ -61,6 +61,7 @@ def calculate(s):
 
             left -= 1
             right += 1
+            multiplier = 1
 
         if total_score > result[0]:
             result = [int(total_score), int(i)]

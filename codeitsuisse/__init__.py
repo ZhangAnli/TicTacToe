@@ -6,3 +6,5 @@ import codeitsuisse.routes.tictactoe
 import codeitsuisse.routes.optionsOptimisation
 import codeitsuisse.routes.timeTravellingStonksMan
 import codeitsuisse.routes.quoridor
+import codeitsuisse.routes.parasite
+
